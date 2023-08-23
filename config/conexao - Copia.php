@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$database = "senais88_reserva";
-$username = "senais88_reserva";
-$password = "cJ5iLERE1s3wDfgf";
+$database = "reserva_veiculo";
+$username = "root";
+$password = "";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
