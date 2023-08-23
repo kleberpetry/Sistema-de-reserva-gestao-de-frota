@@ -1,0 +1,36 @@
+#date-selector {
+    max-width: 100px;
+    border: 1px solid rgba(0,0,0,0.5);
+    padding: 0 0.25rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.scroll {
+    border: 0;
+    border-collapse: collapse;
+}    
+.scroll tr {
+    display: flex;
+}    
+.scroll td {
+    flex: 1;
+}    
+.scroll thead tr:after {
+    overflow-y: scroll;
+    visibility: hidden;
+    height: 0;
+}    
+.scroll thead th {
+    flex: 1;
+    display: block;
+    text-align: center;
+}
+.scroll thead td {
+    text-align: center;
+}
+.scroll tbody {
+    display: block;
+    overflow-y: auto;
+    height: calc(100vh - 180px);
+}
