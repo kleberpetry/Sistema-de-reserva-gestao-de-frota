@@ -14,7 +14,7 @@
 <head>
   <?php include "./components/head.php" ?>
   <link rel="stylesheet" href="./styles/index.css">
-  <title>SRV | Login</title>
+  <title>SRV | Sistema de reservas interno SENAI CTM</title>
 
   <style>
     #toast-container {
@@ -31,7 +31,7 @@
 <body>
   <div class="container grey lighten-5">
     <p class="center" id="p-car-icon"><img src="./images/car.svg" alt="Logo" width="75" height="75" /></p>
-    <h3 class="center">Login</h3>
+    <h3 class="center">Acesso</h3>
     <form id="form-login" method="POST">
       <div class="input-field">
         <img src="./images/person-circle.svg" class="prefix" width="32" height="32" style="padding-right: 1rem;" />
