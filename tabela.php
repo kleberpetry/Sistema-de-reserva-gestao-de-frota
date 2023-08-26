@@ -32,7 +32,11 @@ foreach ($reservas as $reserva) {
     $reservationStart = new DateTime($reserva['data_saida'], new DateTimeZone('America/Sao_Paulo'));
     $reservationEnd = new DateTime($reserva['data_retorno'], new DateTimeZone('America/Sao_Paulo'));
 
-    if ($reservationStart >= $startTime && $reservationEnd <= $endTime) {
+    if (
+        ($startTime >= $reservationStart && $startTime < $reservationEnd) ||
+        ($endTime > $reservationStart && $endTime <= $reservationEnd) ||
+        ($startTime <= $reservationStart && $endTime >= $reservationEnd)
+    ) {
         $reservasFiltradas[] = $reserva;
     }
 }

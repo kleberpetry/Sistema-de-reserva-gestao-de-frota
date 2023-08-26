@@ -8,7 +8,7 @@
         <a href="/reserva/veiculos.php" class="waves-effect waves-light btn-flat white-text reservar hide-on-med-and-down"><i class="material-icons right">local_shipping</i>Reservar</a>
       </li>
       <li>
-        <a href="/reserva/tabela.php" class="waves-effect waves-light btn-flat white-text consultar hide-on-med-and-down"><i class="material-icons right">table_view</i>Consultar</a>
+        <a href="/reserva/tabela.php" class="waves-effect waves-light btn-flat white-text consultar hide-on-med-and-down"><i class="material-icons right">table_view</i>Consultar Disponibilidade</a>
       </li>
     </ul>
     <div class="usuario hide-on-small-only">
@@ -51,7 +51,7 @@
     <li><div class="divider"></div></li>
     <li><a class="subheader">Acesso Rápido</a></li>
     <li><a href="/reserva/veiculos.php" class="waves-effect"><i class="material-icons">add</i>Reservas</a></li>
-    <li><a href="/reserva/tabela.php" class="waves-effect"><i class="material-icons">table_view</i>Tabela</a></li>
+    <li><a href="/reserva/tabela.php" class="waves-effect"><i class="material-icons">table_view</i>Consultar Disponibilidade</a></li>
     <li><a href="/reserva/historico.php" class="waves-effect"><i class="material-icons">history</i>Histórico</a></li>
     <?php if ($_SESSION['tipo'] === "A") { ?>
       <li><div class="divider"></div></li>
