@@ -12,7 +12,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 $currentDate = date("Y-m-d");
 
-$sql = "SELECT id_reserva, data_saida, data_retorno, nome, modelo, placa, destino FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo";
+$sql = "SELECT id_reserva, data_saida, data_retorno, nome, condutor, modelo, placa, destino FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo";
 $res = mysqli_query($conn, $sql);
 $reservas = mysqli_fetch_all($res, MYSQLI_ASSOC);
 mysqli_free_result($res);
@@ -64,14 +64,15 @@ function isReserved($time, $placa) {
             $data_retorno = new DateTime($reserva['data_retorno'], new DateTimeZone('America/Sao_Paulo'));
             
             if ($time_to_check >= $data_saida && $time_to_check <= $data_retorno) {
-                return true;
+                return $reserva;
             }
         }
     }
 
-    return false;
+    return null;
 }
 
+$printed = [];
 
 ?>
 
@@ -83,7 +84,7 @@ function isReserved($time, $placa) {
         <title>Tabela</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/reserva/styles/tabela.css">
+        <link rel="stylesheet" href="/tcc/styles/tabela.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </head>
     <body>
@@ -95,7 +96,7 @@ function isReserved($time, $placa) {
                         <input id="date-selector" type="text" class="datepicker datetime-input" placeholder="<?= $today->format('Y-m-d') ?>" autocomplete="off" value="" />
                     </td>
                     <?php foreach ($veiculos as $veiculo) { ?>
-                        <td><?= $veiculo['modelo'] ?> <?= $veiculo['placa'] ?></td>
+                        <td><?= $veiculo['modelo'] ?></td>
                     <?php } ?>
                 </tr>
             </thead>
@@ -110,9 +111,25 @@ function isReserved($time, $placa) {
             <tbody>
                 <?php foreach ($timeSlots as $time) { ?>
                     <tr>
-                        <td><?= $time ?></td>
-                        <?php foreach ($veiculos as $veiculo) { ?>
-                            <td style="background-color: <?= isReserved($time, $veiculo['placa']) ? '#3f51b5' : 'unset' ?>;"></td>
+                        <td class="time-td"><?= $time ?></td>
+                        <?php foreach ($veiculos as $veiculo) {
+                            $reserva = isReserved($time, $veiculo['placa']);
+                            $shouldPrint = false;
+                            
+                            if ($reserva && !in_array($reserva['id_reserva'], $printed)) {
+                                $shouldPrint = true;
+                                $printed[] = $reserva['id_reserva'];
+                            }
+                        ?>
+                            <td style="background-color: <?= $reserva ? '#5c6bc0' : 'unset' ?>; position: relative;">
+                                <?php if ($shouldPrint) { ?>
+                                    <ul class="reservation-details">
+                                        <li><?= $reserva['placa'] ?></li>
+                                        <li><?= $reserva['condutor'] ?></li>
+                                        <li><?= $reserva['destino'] ?></li>
+                                    </ul>
+                                <?php } ?>
+                            </td>
                         <?php } ?>
                     </tr>
                 <?php } ?>

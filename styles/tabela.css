@@ -9,13 +9,14 @@
 .scroll {
     border: 0;
     border-collapse: collapse;
+    width: 100%;
 }    
 .scroll tr {
     display: flex;
 }    
 .scroll td {
     flex: 1;
-}    
+} 
 .scroll thead tr:after {
     overflow-y: scroll;
     visibility: hidden;
@@ -32,5 +33,33 @@
 .scroll tbody {
     display: block;
     overflow-y: auto;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 150px);
+}
+
+.scroll tbody tr {
+    border-bottom: none;
+}
+
+.scroll tbody td {
+    border-radius: 0;
+    color: white;
+    width: 25%;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.scroll .time-td {
+    color: black;
+    text-align: left;
+}
+
+.reservation-details {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    color: black;
+    margin: 0;
 }
