@@ -171,6 +171,19 @@ $("#form-usuario").submit(function(e){
     msg = 'Preencha o campo CPF';
     emptyField = $('#cpf');
     empty = true;
+  }else if(!cnh){
+    msg = 'Preencha o campo CNH';
+    emptyField = $('#cnh');
+    empty = true;
+  }else if(!validade_carteira){
+    msg = 'Selecione a data de VALIDADE DA CARTEIRA';
+    emptyField = $('#validade_carteira');
+    emptyField.click();
+    empty = true;
+  }else if(!telefone){
+    msg = 'Preencha o campo TELEFONE';
+    emptyField = $('#telefone');
+    empty = true;
   }else if(!senha){
     msg = 'Preencha o campo SENHA';
     emptyField = $('#senha');
@@ -190,6 +203,20 @@ $("#form-usuario").submit(function(e){
   
   //Varificar dados repetidos
   if(!empty){
+    if(telefone != telefoneAtual){
+      if(verificaDadosRepetidos("telefone", telefone)){
+        msg = 'Ja existe um Usuario com esse TELEFONE';
+        $("#telefone").addClass("invalid")
+        valid = false;
+      }
+    }
+    if(cnh != cnhAtual){
+      if(verificaDadosRepetidos("cnh", cnh)){
+        msg = 'Ja existe um Usuario com esse CNH';
+        $("#cnh").addClass("invalid")
+        valid = false;
+      }
+    }
     if(cpf != cpfAtual){
       if(verificaDadosRepetidos("cpf", cpf)){
         msg = 'Ja existe um Usuario com esse CPF';
